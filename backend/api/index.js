@@ -56,6 +56,15 @@ const qrRoutes = require("../routes/validateQR");
 
 const app = express();
 
+
+process.on("uncaughtException", err => {
+  console.error("❌ Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", err => {
+  console.error("❌ Unhandled Rejection:", err);
+});
+
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
