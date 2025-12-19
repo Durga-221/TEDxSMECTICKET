@@ -50,7 +50,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 // 🔹 DB connections (IMPORTANT: just importing initializes them)
-require("../db/connections");
+// require("../db/connections");
 
 const qrRoutes = require("../routes/validateQR");
 
