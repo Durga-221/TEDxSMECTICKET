@@ -42,3 +42,40 @@
 // // app.listen(PORT, () =>
 // //   console.log(`Server running on port ${PORT}`)
 // // );
+
+
+
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+
+require("./db/connections");
+const qrRoutes = require("./routes/validateQR");
+
+const app = express();
+
+app.use(cors({ origin: "*" }));
+app.use(express.json());
+
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "Backend running 🚀"
+  });
+});
+
+app.use("/api/qr", qrRoutes);
+
+/**
+ * 🔹 LOCAL ONLY
+ * Vercel will IGNORE this
+ */
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () =>
+    console.log(`✅ Local server running on port ${PORT}`)
+  );
+}
+
+// 🔹 REQUIRED FOR VERCEL
+module.exports = app;
