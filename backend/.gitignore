@@ -1,0 +1,19 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn.lock
+
+# Env files
+.env
+.env.production
+.env.local
+
+# Build outputs
+dist/
+build/
+
+# OS
+.DS_Store
+
+# Vercel
+.vercel
