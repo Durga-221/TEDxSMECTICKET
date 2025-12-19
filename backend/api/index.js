@@ -1,5 +1,29 @@
-// import express from "express";
-// import cors from "cors";
+// // import express from "express";
+// // import cors from "cors";
+
+// // const app = express();
+
+// // app.use(cors());
+// // app.use(express.json());
+
+// // app.get("/api/health", (req, res) => {
+// //   res.json({
+// //     success: true,
+// //     message: "Backend deployed successfully 🚀"
+// //   });
+// // });
+
+// // // Example API
+// // app.post("/api/test", (req, res) => {
+// //   res.json({ received: req.body });
+// // });
+
+// // export default app;
+
+
+
+// const express = require("express");
+// const cors = require("cors");
 
 // const app = express();
 
@@ -18,28 +42,32 @@
 //   res.json({ received: req.body });
 // });
 
-// export default app;
-
+// module.exports = app;
 
 
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
+// 🔹 DB connections (IMPORTANT: just importing initializes them)
+require("../db/connections");
+
+const qrRoutes = require("../routes/validateQR");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
+// health check
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
-    message: "Backend deployed successfully 🚀"
+    message: "Backend running on Vercel 🚀"
   });
 });
 
-// Example API
-app.post("/api/test", (req, res) => {
-  res.json({ received: req.body });
-});
+// routes
+app.use("/api/qr", qrRoutes);
 
-module.exports = app;
+module.exports = app; // ✅ REQUIRED
