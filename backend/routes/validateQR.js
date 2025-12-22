@@ -136,4 +136,61 @@ router.post("/validate", async (req, res) => {
   }
 });
 
+
+/* =====================================================
+   🔍 GET FULL TICKET DETAILS (READ-ONLY)
+===================================================== */
+router.post("/details", async (req, res) => {
+  try {
+    const { ticketCode } = req.body;
+
+    if (!ticketCode) {
+      return res.status(400).json({
+        status: "ERROR",
+        message: "Ticket code missing"
+      });
+    }
+
+    const ticket = await Ticket.findOne({ ticketCode });
+
+    if (!ticket) {
+      return res.json({
+        status: "INVALID",
+        message: "❌ Invalid QR Code"
+      });
+    }
+
+    const validation = await Validation.findOne({ ticketCode });
+
+    res.json({
+      status: "VALID",
+      isVerified: !!validation,
+      ticket: {
+        _id: ticket._id,
+        eventId: ticket.eventId,
+        eventName: ticket.eventName,
+        studentName: ticket.studentName,
+        rollNumber: ticket.rollNumber,
+        year: ticket.year,
+        department: ticket.department,
+        section: ticket.section,
+        email: ticket.email,
+        phone: ticket.phone,
+        price: ticket.price,
+        ticketCode: ticket.ticketCode,
+        status: ticket.status,
+        createdAt: ticket.createdAt
+      }
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: "ERROR",
+      message: "Server error"
+    });
+  }
+});
+
+
 module.exports = router;
