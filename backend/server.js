@@ -93,14 +93,14 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
+app.get("/health", (req, res) => {
   res.json({
     success: true,
     message: "Backend running 🚀"
   });
 });
 
-app.use("/api/qr", qrRoutes);
+app.use("/qr", qrRoutes);
 
 // ✅ REQUIRED FOR RENDER (ALWAYS LISTEN)
 const PORT = process.env.PORT || 10000;
