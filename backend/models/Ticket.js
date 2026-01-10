@@ -44,6 +44,8 @@ const TicketSchema = new mongoose.Schema(
 
     eventName: String,
     price: { type: Number, default: 0 },
+    quantity: { type: Number, default: 1 }, // number of tickets
+
 
     studentName: { type: String, required: true },
     rollNumber: String,

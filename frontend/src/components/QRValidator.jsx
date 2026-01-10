@@ -1459,6 +1459,7 @@ export default function QRValidator() {
                   <p><b>Roll:</b> {ticket.rollNumber}</p>
                   <p><b>Dept:</b> {ticket.department}</p>
                   <p><b>Phone:</b> {ticket.phone}</p>
+                  <p><b>Quantity:</b> {ticket.quantity}</p>
                   <p><b>Status:</b> {ticket.status}</p>
                 </div>
               )}
