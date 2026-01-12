@@ -234,7 +234,8 @@ router.post("/validate", async (req, res) => {
       return res.json({
         status: "ALREADY_VERIFIED",
         message: "⚠️ Ticket already verified",
-        quantity: ticket.quantity
+        quantity: ticket.quantity,
+        seats: ticket.seats
       });
     }
 
@@ -307,6 +308,7 @@ router.post("/details", async (req, res) => {
 
         price: ticket.price,
         quantity: ticket.quantity, // ✅ NEWLY ADDED
+        seats: ticket.seats, // ✅ NEWLY ADDED
 
         ticketCode: ticket.ticketCode,
         status: ticket.status,
